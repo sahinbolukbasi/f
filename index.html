@@ -43,7 +43,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 1rem; /* 2rem -> 1rem mobil için */
+            padding: 1rem;
             position: relative;
             z-index: 10;
         }
@@ -54,74 +54,74 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 350px; /* Mobilde daha küçük */
+            height: 350px;
             perspective: 1000px;
-            margin: 1rem 0; /* 2rem -> 1rem */
+            margin: 1rem 0;
         }
 
         .cake-3d {
             position: relative;
             transform-style: preserve-3d;
             animation: cakeFloat 4s ease-in-out infinite;
-            transform: scale(1.1); /* Mobilde biraz daha küçük */
+            transform: scale(1.1);
         }
 
         .cake-base {
-            width: 260px; /* 200px -> 260px */
-            height: 130px; /* 100px -> 130px */
+            width: 260px;
+            height: 130px;
             background: linear-gradient(135deg, #8B4513, #D2691E);
-            border-radius: 30px; /* 25px -> 30px */
+            border-radius: 30px;
             position: relative;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
         .cake-layer {
-            width: 208px; /* 160px -> 208px */
-            height: 104px; /* 80px -> 104px */
+            width: 208px;
+            height: 104px;
             background: linear-gradient(135deg, #FFB6C1, #FF69B4);
-            border-radius: 25px; /* 20px -> 25px */
+            border-radius: 25px;
             position: absolute;
-            top: -65px; /* -50px -> -65px */
-            left: 26px; /* 20px -> 26px */
+            top: -65px;
+            left: 26px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .cake-top {
-            width: 156px; /* 120px -> 156px */
-            height: 78px; /* 60px -> 78px */
+            width: 156px;
+            height: 78px;
             background: linear-gradient(135deg, #FFFFFF, #F0F8FF);
-            border-radius: 20px; /* 15px -> 20px */
+            border-radius: 20px;
             position: absolute;
-            top: -117px; /* -90px -> -117px */
-            left: 52px; /* 40px -> 52px */
+            top: -117px;
+            left: 52px;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
         }
 
         .candles-container {
             position: absolute;
-            top: -150px; /* -120px -> -150px */
+            top: -150px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px; /* 15px -> 20px */
+            gap: 20px;
         }
 
         .candle {
-            width: 13px; /* 10px -> 13px */
-            height: 52px; /* 40px -> 52px */
+            width: 13px;
+            height: 52px;
             background: linear-gradient(to bottom, #FFD700, #FFA500);
-            border-radius: 6px; /* 5px -> 6px */
+            border-radius: 6px;
             position: relative;
             transition: all 0.5s ease;
         }
 
         .flame {
             position: absolute;
-            top: -26px; /* -20px -> -26px */
+            top: -26px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px; /* 15px -> 20px */
-            height: 26px; /* 20px -> 26px */
+            width: 20px;
+            height: 26px;
             background: radial-gradient(circle, #FF6347 0%, #FF4500 70%, #FFD700 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             animation: flicker 1s ease-in-out infinite alternate;
@@ -148,7 +148,7 @@
 
         /* Microphone Button */
         .mic-container {
-            margin: 1.5rem 0; /* 2rem -> 1.5rem */
+            margin: 1.5rem 0;
             text-align: center;
             width: 100%;
             padding: 0 1rem;
@@ -158,16 +158,15 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             border-radius: 50%;
-            width: 70px; /* Mobilde biraz daha küçük */
+            width: 70px;
             height: 70px;
-            font-size: 1.8rem; /* 2rem -> 1.8rem */
+            font-size: 1.8rem;
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
             position: relative;
             overflow: hidden;
-            /* Mobil dokunma için daha iyi hedefleme */
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
@@ -194,16 +193,15 @@
         }
 
         .mic-button.listening {
-            animation: pulse 1s infinite;
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            animation: pulse 2s infinite;
+            background: linear-gradient(135deg, #ff4757 0%, #ff3838 100%);
         }
 
         .mic-instruction {
             color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem; /* 1.1rem -> 1rem */
+            font-size: 1.1rem;
             margin-top: 1rem;
             font-weight: 300;
-            padding: 0 1rem;
             text-align: center;
         }
 
@@ -223,17 +221,16 @@
         .falling-heart {
             position: absolute;
             font-size: 2rem;
-            color: #e74c3c;
-            animation: fall 4s linear infinite;
-            opacity: 0;
+            animation: fall 4s linear forwards;
+            user-select: none;
+            pointer-events: none;
         }
 
         .falling-confetti {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            animation: fall 3s linear infinite;
-            opacity: 0;
+            width: 10px;
+            height: 10px;
+            animation: fall 3s linear forwards;
         }
 
         .confetti-1 { background: #FF6B9D; }
@@ -245,76 +242,68 @@
         /* Message Card */
         .message-card {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 24px; /* Tekrar büyük boyut */
-            padding: 2rem; /* Tekrar büyük padding */
-            max-width: 600px; /* Büyük ekranlar için geniş */
-            width: 90%; /* Responsive genişlik */
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
             text-align: center;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-            margin: 2rem auto; /* Büyük margin */
+            margin: 2rem auto;
             position: relative;
             z-index: 10;
         }
 
         .message-text {
-            font-size: 1.2rem; /* Büyük yazı boyutu */
-            line-height: 1.8; /* Rahat satır aralığı */
+            font-size: 1.2rem;
+            line-height: 1.8;
             color: rgba(255, 255, 255, 0.95);
             font-weight: 300;
         }
 
         .message-text strong {
+            color: #FFD700;
             font-weight: 600;
-            background: linear-gradient(135deg, #f093fb, #f5f7fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         /* Footer */
         .footer {
             position: fixed;
-            bottom: 5px; /* 10px -> 5px */
+            bottom: 10px;
             width: 100%;
             text-align: center;
-            font-size: 0.6rem; /* 0.7rem -> 0.6rem */
+            font-size: 0.7rem;
             color: rgba(255, 255, 255, 0.7);
             font-weight: 300;
             z-index: 5;
-            padding: 0 1rem;
         }
 
         /* Animations */
-        @keyframes balloonFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        @keyframes balloonSway {
-            0%, 100% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-        }
-
         @keyframes cakeFloat {
-            0%, 100% { transform: translateY(0) rotateY(0deg); }
-            50% { transform: translateY(-15px) rotateY(5deg); }
+            0%, 100% { transform: translateY(0) rotateY(0deg) scale(1.1); }
+            50% { transform: translateY(-10px) rotateY(5deg) scale(1.1); }
         }
 
         @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
-            100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+            0% { 
+                transform: translateX(-50%) scale(1) rotate(-2deg);
+                opacity: 0.9;
+            }
+            100% { 
+                transform: translateX(-50%) scale(1.1) rotate(2deg);
+                opacity: 1;
+            }
         }
 
         @keyframes smoke-rise {
             0% {
-                opacity: 1;
+                opacity: 0.8;
                 transform: translateX(-50%) translateY(0) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translateX(-50%) translateY(-40px) scale(0.3);
+                transform: translateX(-50%) translateY(-50px) scale(3);
             }
         }
 
@@ -326,11 +315,9 @@
 
         @keyframes fall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
             }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
             100% {
                 transform: translateY(100vh) rotate(360deg);
                 opacity: 0;
@@ -338,8 +325,16 @@
         }
 
         @keyframes backgroundShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
+            0%, 100% {
+                background: 
+                    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+            }
+            50% {
+                background: 
+                    radial-gradient(circle at 80% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 20% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+            }
         }
 
         /* Responsive */
@@ -349,46 +344,46 @@
             }
 
             .cake-container { 
-                height: 280px; /* Daha da küçük */
+                height: 280px;
             }
             
             .cake-3d {
-                transform: scale(0.9); /* Daha küçük ölçek */
+                transform: scale(0.9);
             }
             
             .cake-base { 
-                width: 180px; /* Daha küçük */
-                height: 90px; 
+                width: 180px;
+                height: 90px;
             }
             
             .cake-layer { 
-                width: 144px; 
-                height: 72px; 
-                top: -45px; 
-                left: 18px; 
+                width: 144px;
+                height: 72px;
+                top: -45px;
+                left: 18px;
             }
             
             .cake-top { 
-                width: 108px; 
-                height: 54px; 
-                top: -81px; 
-                left: 36px; 
+                width: 108px;
+                height: 54px;
+                top: -81px;
+                left: 36px;
             }
             
             .candles-container { 
-                top: -100px; 
-                gap: 12px; 
+                top: -100px;
+                gap: 12px;
             }
             
             .candle { 
-                width: 10px; 
-                height: 40px; 
+                width: 10px;
+                height: 40px;
             }
             
             .flame { 
-                width: 16px; 
-                height: 20px; 
-                top: -20px; 
+                width: 16px;
+                height: 20px;
+                top: -20px;
             }
 
             .mic-button {
@@ -402,20 +397,19 @@
             }
 
             .message-card { 
-                padding: 1.5rem; /* Mobilde biraz küçük */
+                padding: 1.5rem;
                 margin: 1.5rem auto;
                 border-radius: 20px;
-                max-width: 500px; /* Mobilde biraz daha dar */
-                width: 85%; /* Mobilde kenar boşlukları */
+                max-width: 500px;
+                width: 85%;
             }
 
             .message-text {
-                font-size: 1rem; /* Mobilde biraz küçük yazı */
+                font-size: 1rem;
                 line-height: 1.6;
             }
         }
 
-        /* Çok küçük ekranlar için */
         @media (max-width: 480px) {
             .container {
                 padding: 0.5rem;
@@ -446,15 +440,15 @@
             }
 
             .message-card {
-                padding: 1.2rem; /* Küçük ekranlarda daha az padding */
+                padding: 1.2rem;
                 margin: 1rem auto;
                 max-width: 400px;
-                width: 90%; /* Daha geniş kullanım */
+                width: 90%;
                 border-radius: 18px;
             }
 
             .message-text {
-                font-size: 0.9rem; /* Küçük ekranlarda küçük yazı */
+                font-size: 0.9rem;
                 line-height: 1.5;
             }
 
@@ -464,7 +458,6 @@
             }
         }
 
-        /* Yatay ekran orientasyonu için */
         @media (max-height: 600px) and (orientation: landscape) {
             .container {
                 padding: 0.5rem;
@@ -480,7 +473,7 @@
             }
 
             .message-card {
-                padding: 1rem; /* Yatay ekranda kompakt */
+                padding: 1rem;
                 margin: 1rem auto;
                 max-width: 450px;
                 width: 80%;
@@ -496,7 +489,6 @@
             }
         }
 
-        /* Tablet boyutları için */
         @media (min-width: 481px) and (max-width: 1024px) {
             .message-card {
                 max-width: 550px;
@@ -510,10 +502,9 @@
             }
         }
 
-        /* Dokunmatik cihazlar için optimizasyonlar */
         @media (hover: none) and (pointer: coarse) {
             .mic-button:hover {
-                transform: none; /* Hover efektlerini devre dışı bırak */
+                transform: none;
             }
 
             .mic-button:active {
@@ -567,9 +558,10 @@
         <!-- Message -->
         <div class="message-card">
             <p class="message-text">
-                Bugün senin <strong>özel günün</strong>! 
+                Bugün senin <strong>özel günün</strong>! Hayatıma getirdiğin 
+                <strong>mutluluk ve güzellik</strong> için teşekkürler. 
                 Bu yeni yaşında tüm hayallerin gerçek olsun! 
-               <strong> Doğum günün kutlu olsun! 🎉🎂 </strong>
+                <strong>Seni çok seviyorum! 💖</strong>
             </p>
         </div>
     </div>
@@ -586,12 +578,12 @@
         let microphone;
         let dataArray;
         let candlesBlown = false;
-        // Ses dosyasının yolunu düzeltiyoruz (göreceli yol kullanarak)
+        // Safari için ses dosyası yükleme
         let birthdayAudio = new Audio('./sound.mp3');
         
         // Ses dosyasını ön yükleme
         document.addEventListener('DOMContentLoaded', function() {
-            // Ses dosyasını ön yükle
+            // Safari için ses dosyasını ön yükle
             birthdayAudio.load();
             console.log('Ses dosyası yüklendi');
         });
@@ -626,18 +618,43 @@
             }
         }
 
-        // Microphone functionality
+        // Safari uyumlu Microphone functionality
         async function toggleMicrophone() {
             const micButton = document.getElementById('micButton');
             const micInstruction = document.getElementById('micInstruction');
 
             if (!isListening) {
                 try {
-                    // Request microphone access
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    // Safari için özel mikrofon erişimi
+                    const constraints = { 
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            autoGainControl: true,
+                            sampleRate: 44100
+                        } 
+                    };
                     
-                    // Setup audio context
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    // Safari için navigator.mediaDevices kontrolü
+                    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                        throw new Error('Bu tarayıcı mikrofon erişimini desteklemiyor');
+                    }
+                    
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    
+                    // Safari için AudioContext desteği
+                    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!window.AudioContext) {
+                        throw new Error('Bu tarayıcı Web Audio API desteklemiyor');
+                    }
+                    
+                    audioContext = new AudioContext();
+                    
+                    // Safari için AudioContext'i resume etmek gerekiyor
+                    if (audioContext.state === 'suspended') {
+                        await audioContext.resume();
+                    }
+                    
                     analyser = audioContext.createAnalyser();
                     microphone = audioContext.createMediaStreamSource(stream);
                     
@@ -657,7 +674,12 @@
                     
                 } catch (error) {
                     console.error('Mikrofon erişimi reddedildi:', error);
-                    micInstruction.textContent = 'Mikrofon izni gerekli!';
+                    micInstruction.textContent = 'Mikrofon izni gerekli! Lütfen tarayıcı ayarlarından izin verin.';
+                    
+                    // Safari için alternatif mesaj
+                    if (error.name === 'NotAllowedError') {
+                        micInstruction.textContent = 'Safari\'de mikrofon iznini aktifleştirin: Ayarlar > Web Siteleri > Mikrofon';
+                    }
                 }
             } else {
                 stopListening();
@@ -665,7 +687,7 @@
         }
 
         function monitorAudioLevel() {
-            if (!isListening) return;
+            if (!isListening || !analyser) return;
             
             analyser.getByteFrequencyData(dataArray);
             
@@ -676,7 +698,7 @@
             }
             const average = sum / dataArray.length;
             
-            // Ses eşiğini 50'den 80'e yükseltiyoruz - daha güçlü üfleme gerekecek
+            // Ses eşiğini 80'e yükseltiyoruz - daha güçlü üfleme gerekecek
             if (average > 80 && !candlesBlown) {
                 console.log("Üfleme seviyesi: " + average);
                 blowCandles();
@@ -698,7 +720,7 @@
             micButton.innerHTML = '🎤';
             micInstruction.textContent = 'Mikrofona üfle ve mumları söndür!';
             
-            if (audioContext) {
+            if (audioContext && audioContext.state !== 'closed') {
                 audioContext.close();
             }
         }
@@ -724,13 +746,14 @@
             
             // Tüm mumlar söndükten sonra animasyonu başlat
             setTimeout(() => {
-                // Ses dosyasını çal - hata yönetimini iyileştiriyoruz
+                // Safari için ses çalma
                 try {
                     console.log('Ses çalınıyor...');
-                    // Kullanıcı etkileşimini garantilemek için
                     birthdayAudio.volume = 1.0;
                     birthdayAudio.currentTime = 0;
-                    let playPromise = birthdayAudio.play();
+                    
+                    // Safari için play promise kontrolü
+                    const playPromise = birthdayAudio.play();
                     
                     if (playPromise !== undefined) {
                         playPromise.then(_ => {
@@ -738,12 +761,14 @@
                         })
                         .catch(error => {
                             console.error('Ses çalma hatası:', error);
-                            // Alternatif yöntem: kullanıcı tıklamasıyla sesi çalma
-                            alert('Doğum günü müziğini çalmak için ekrana tıklayın!');
-                            document.body.addEventListener('click', function playOnce() {
-                                birthdayAudio.play();
-                                document.body.removeEventListener('click', playOnce);
-                            });
+                            // Safari için alternatif yöntem
+                            if (error.name === 'NotAllowedError') {
+                                alert('Safari\'de ses çalmak için önce kullanıcı etkileşimi gerekli. Ekrana tıklayın!');
+                                document.body.addEventListener('click', function playOnce() {
+                                    birthdayAudio.play();
+                                    document.body.removeEventListener('click', playOnce);
+                                }, { once: true });
+                            }
                         });
                     }
                 } catch (e) {
@@ -769,7 +794,7 @@
                 
                 // Sürekli konfeti oluşturmaya devam et
                 startContinuousConfetti();
-            }, flames.length * 300 + 500); // Tüm mumlar söndükten sonra biraz bekle
+            }, flames.length * 300 + 500);
             
             candlesBlown = true;
             stopListening();
@@ -843,12 +868,6 @@
             birthdayAudio.pause();
             birthdayAudio.currentTime = 0;
         }
-
-        // 15 saniyelik sıfırlama zamanlayıcısını kaldırıyoruz
-        // setTimeout(() => {
-        //    ...
-        // }, 15000);
-
     </script>
 </body>
 </html>
