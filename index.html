@@ -629,11 +629,64 @@ nüyor            /* Mobil dokunma için daha iyi hedefleme */
         // Ses dosyasının yolunu düzeltiyoruz (göreceli yol kullanarak)
         let birthdayAudio = new Audio('./sound.mp3');
         
-        // Ses dosyasını ön yükleme
+        // Ses dosyasını ön yükleme ve otomatik çalma için hazırlama
         document.addEventListener('DOMContentLoaded', function() {
             // Ses dosyasını ön yükle
             birthdayAudio.load();
-            console.log('Ses dosyası yüklendi');
+            birthdayAudio.preload = 'auto';
+            
+            // Kullanıcı sesini aç
+            birthdayAudio.muted = false;
+            
+            // Sayfa yüklendiğinde AudioContext'i başlat
+            // (kullanıcı etkileşimi için hazırlık)
+            if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+                const audioCtx = new (AudioContext || webkitAudioContext)();
+                if (audioCtx.state === 'suspended') {
+                    document.addEventListener('touchstart', function resumeAudio() {
+                        audioCtx.resume();
+                        document.removeEventListener('touchstart', resumeAudio);
+                    }, { once: true, passive: true });
+                }
+            }
+            
+            console.log('Ses dosyası yüklendi ve hazır');
+        });
+        
+        // Sayfanın otomatik çalma için hazırlanması
+        window.addEventListener('load', function() {
+            // Safari ve mobil tarayıcılar için otomatik çalma izni elde etme
+            const setupAutoplay = function() {
+                // AudioContext'i başlat
+                if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+                    const audioCtx = new (AudioContext || webkitAudioContext)();
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                }
+                
+                // Tıklama ile ses oynatmaya hazırlık
+                birthdayAudio.play().then(() => {
+                    console.log('Ses çalmaya hazır');
+                    birthdayAudio.pause();
+                    birthdayAudio.currentTime = 0;
+                }).catch(err => {
+                    console.log('Ses çalma hazırlığı başarısız:', err);
+                });
+                
+                // Ekran etkileşimi dinleyicisini kaldır
+                document.removeEventListener('touchstart', setupAutoplay);
+                document.removeEventListener('click', setupAutoplay);
+            };
+            
+            // Dokunma ve tıklama olaylarını dinle (kullanıcı etkileşimi için)
+            document.addEventListener('touchstart', setupAutoplay, { once: true, passive: true });
+            document.addEventListener('click', setupAutoplay, { once: true });
+            
+            // Ses dosyasının yüklenmesini sağla
+            if (birthdayAudio.readyState < 2) { // HAVE_CURRENT_DATA
+                birthdayAudio.load();
+            }
         });
         
         // Initialize falling elements
@@ -762,32 +815,46 @@ nüyor            /* Mobil dokunma için daha iyi hedefleme */
                 }, index * 300);
             });
             
-            // Tüm mumlar söndükten sonra animasyonu başlat
+            // Mum üfleme ve ses çalma için tüm tarayıcılarda çalışan kod
             setTimeout(() => {
                 // Ses dosyasını çal - hata yönetimini iyileştiriyoruz
                 try {
-                    console.log('Ses çalınıyor...');
-                    // Kullanıcı etkileşimini garantilemek için
+                    console.log('Ses otomatik çalınıyor...');
                     birthdayAudio.volume = 1.0;
                     birthdayAudio.currentTime = 0;
-                    let playPromise = birthdayAudio.play();
+                    birthdayAudio.muted = false; // Ses kısık olmadığından emin ol
                     
-                    if (playPromise !== undefined) {
-                        playPromise.then(_ => {
-                            console.log('Ses başarıyla çalınıyor');
-                        })
-                        .catch(error => {
-                            console.error('Ses çalma hatası:', error);
-                            // Alternatif yöntem: kullanıcı tıklamasıyla sesi çalma
-                            alert('Doğum günü müziğini çalmak için ekrana tıklayın!');
-                            document.body.addEventListener('click', function playOnce() {
-                                birthdayAudio.play();
-                                document.body.removeEventListener('click', playOnce);
-                            });
-                        });
-                    }
+                    // Birkaç farklı yöntemle sesi çalma denemesi
+                    const playAudioWithRetry = () => {
+                        const attemptPlay = () => {
+                            const playPromise = birthdayAudio.play();
+                            
+                            if (playPromise !== undefined) {
+                                playPromise.then(() => {
+                                    console.log('Ses başarıyla çalınıyor');
+                                }).catch(e => {
+                                    console.log('Tekrar deneniyor...');
+                                    setTimeout(() => birthdayAudio.play().catch(() => {}), 100);
+                                });
+                            }
+                        };
+                        
+                        attemptPlay();
+                        setTimeout(attemptPlay, 500);
+                        setTimeout(attemptPlay, 1000);
+                    };
+                    
+                    // Kullanıcı zaten mikrofon butonuna tıklamış olduğu için
+                    // etkileşim var, bu etkileşimi kullanarak sesi otomatik çal
+                    playAudioWithRetry();
+                    
+                    // Hiçbir alert göstermeden, arka planda çalmayı dene
+                    document.addEventListener('touchstart', function() {
+                        birthdayAudio.play().catch(() => {});
+                    }, { once: true, passive: true });
+                    
                 } catch (e) {
-                    console.error('Ses çalma hatası oluştu:', e);
+                    console.error('Ses çalma hatası:', e);
                 }
                 
                 // Falling elements'i görünür yap
